@@ -1,0 +1,344 @@
+page {
+  height: 100%;
+  width: 100%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #1C1C1C;
+  color: #FFFFFF;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 10px 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  background-image: radial-gradient(circle at top left, #4a2800 0%, transparent 60%),
+      radial-gradient(circle at bottom right, #4a2800 0%, transparent 60%);
+  background-color: #1C1C1C;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+
+/* Home Logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 180px;
+  height: 80px;
+  /* object-fit isn't directly supported by image in same way, but mode="widthFix" helps in wxml */
+}
+
+/* Game Logo (Override/Specific) */
+.game-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px; /* Reduced */
+}
+
+.game-logo .logo {
+  width: 150px; /* Reduced */
+  height: 60px; /* Reduced */
+  margin-bottom: 5px;
+}
+
+.game-slogan {
+  font-size: 7px; /* Reduced from 8px */
+  letter-spacing: 2px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-style: italic;
+  opacity: 0.8;
+  max-width: 180px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Home Content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-btn {
+  background-color: #FF7900;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  width: 240px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(255, 121, 0, 0.6);
+  background: linear-gradient(to bottom, #FF8A1F, #FF7900);
+  margin-bottom: 40px;
+}
+
+.start-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 10px rgba(255, 121, 0, 0.4);
+}
+
+.slogan {
+  font-size: 10px;
+  text-align: center;
+  letter-spacing: 6px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  font-style: italic;
+  max-width: 300px;
+  line-height: 1.8;
+  display: block;
+}
+
+/* Game Header */
+.game-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.level-indicator {
+  font-size: 18px;
+  letter-spacing: 4px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  display: block;
+}
+
+.timer {
+  font-size: 48px; /* Reduced from 60px */
+  font-weight: bold;
+  color: #FF7900;
+  line-height: 1;
+}
+
+/* Game Interactions */
+.target-text-container {
+  background-color: #000000;
+  border: 2px solid #FF7900;
+  border-radius: 20px;
+  padding: 15px;
+  width: 100%;
+  max-width: 350px;
+  height: 110px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 20px rgba(255, 121, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.target-text {
+  color: #999;
+  font-size: 10px; /* Reduced from 12px */
+  line-height: 1.5;
+  text-align: left;
+}
+
+.char {
+  transition: color 0.1s;
+}
+
+.char.correct {
+  color: #FF7900;
+}
+
+.char.incorrect {
+  color: red;
+  text-decoration: underline;
+}
+
+.input-box {
+  width: 100%;
+  max-width: 350px;
+  height: 90px;
+  border-radius: 20px;
+  padding: 25px;
+  border: 2px solid #FF7900;
+  font-size: 14px;
+  font-family: inherit;
+  background-color: #FFFFFF;
+  color: #000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+.input-box:focus {
+  box-shadow: 0 0 15px rgba(255, 121, 0, 0.5);
+}
+
+.level-complete-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 80px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.accuracy-container {
+  text-align: center;
+}
+
+.accuracy-percent {
+  font-size: 40px;
+  color: #FF7900;
+  font-weight: bold;
+  display: block;
+  line-height: 1;
+}
+
+.accuracy-label {
+  font-size: 16px;
+  color: #FF7900;
+  font-weight: bold;
+  display: block;
+}
+
+.next-level-btn {
+  background-color: #FF7900;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+  box-shadow: 0 0 15px rgba(255, 121, 0, 0.5);
+  background: linear-gradient(to bottom, #FF8A1F, #FF7900); 
+}
+
+.retry-btn {
+  background-color: #FFD700;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer Navigation Controls */
+.game-nav-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: auto; /* Push to bottom if flex container allows, else uses margin */
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.nav-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.nav-icon:active {
+  opacity: 0.5;
+}
+
+.arrow-symbol {
+  color: #FFFFFF;
+  font-size: 32px;
+  font-weight: 300; /* Minimalist thin style */
+  line-height: 1;
+}
+
+.home-symbol {
+  color: #FFFFFF;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* Congratulations Styles */
+.congrats-container {
+  justify-content: center;
+  padding-top: 0;
+}
+
+.congrats-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.congrats-title {
+  font-size: 30px; /* Reduced from 40px */
+  color: #FF7900;
+  font-weight: 800;
+  text-transform: capitalize;
+  display: block;
+  margin-bottom: 20px; /* Increased margin slightly for balance */
+}
+
+.congrats-subtitle {
+  font-size: 20px; /* Reduced from 32px */
+  color: #FFFFFF;
+  font-weight: 800;
+  line-height: 1.4;
+  display: block;
+  margin-bottom: 40px; /* Adjusted */
+  white-space: pre-wrap;
+}
+
+.home-btn {
+  background-color: #FF7900;
+  border: none;
+  border-radius: 30px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(255, 121, 0, 0.4);
+  background: linear-gradient(to bottom, #FF8A1F, #FF7900);
+}
+
+.home-btn:active {
+  transform: scale(0.95);
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapTempo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Logo Section -->
+            <div class="logo-container">
+                <img src="images/logo.png" alt="TapTempo Logo" class="logo">
+            </div>
+
+            <!-- Main Action Section -->
+            <div class="main-content">
+                <button class="start-btn" onclick="transitionTo('game.html')">Start</button>
+                <p class="slogan">ONLY SPEED REVEALS TRUE FOCUS</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>@Created by orange</p>
+        </div>
+    </div>
+
+    <script>
+        // Fade In on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Small delay to ensure CSS is ready
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 50);
+        });
+
+        // Fade Out function
+        function transitionTo(url) {
+            document.body.classList.remove('loaded');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 600); // Matches CSS transition time
+        }
+    </script>
+</body>
+
+</html>

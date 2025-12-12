@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapTempo - Play</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container game-container">
+        <div class="content-wrapper">
+            <!-- Logo Section -->
+            <div class="logo-container game-logo">
+                <img src="images/logo.png" alt="TapTempo Logo" class="logo">
+                <p class="slogan game-slogan">ONLY SPEED REVEALS TRUE FOCUS</p>
+            </div>
+
+            <!-- Level & Timer -->
+            <div class="game-header">
+                <h2 class="level-indicator">Level <span id="current-level">1</span> / 10</h2>
+                <div class="timer" id="timer">01:00</div>
+            </div>
+
+            <!-- Target Text Box -->
+            <div class="target-text-container">
+                <div class="target-text" id="target-text">
+                    <!-- Text characters will be injected here -->
+                </div>
+            </div>
+
+            <!-- Input Box -->
+            <textarea class="input-box" id="input-box" placeholder="speed here..." autofocus></textarea>
+
+            <!-- Level Complete Section (Hidden by default) -->
+            <div class="level-complete-section" id="level-complete-section" style="display: none;">
+                <div class="accuracy-container">
+                    <h1 class="accuracy-percent">100%</h1>
+                    <p class="accuracy-label">accuracy</p>
+                </div>
+                <button class="next-level-btn" id="next-level-btn">Next level</button>
+            </div>
+
+            <!-- Level Failed Section (Hidden by default) -->
+            <div class="level-complete-section" id="level-failed-section" style="display: none;">
+                <div class="accuracy-container">
+                    <h1 class="accuracy-percent" id="failed-accuracy">0%</h1>
+                    <p class="accuracy-label">accuracy</p>
+                </div>
+                <button class="retry-btn" id="retry-btn">Retry!</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>@Created by orange</p>
+        </div>
+    </div>
+    <script src="game.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 50);
+        });
+
+        function transitionTo(url) {
+            document.body.classList.remove('loaded');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>

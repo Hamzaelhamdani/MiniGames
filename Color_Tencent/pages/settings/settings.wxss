@@ -1,0 +1,159 @@
+.settings-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 80rpx 32rpx 32rpx;
+  gap: 24rpx;
+}
+
+.back-btn {
+  font-size: 48rpx;
+  padding: 16rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: 600;
+}
+
+.content {
+  height: calc(100vh - 160rpx);
+  padding: 0 32rpx 60rpx;
+}
+
+.section {
+  margin-bottom: 48rpx;
+}
+
+.section-title {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 4rpx;
+  margin-bottom: 20rpx;
+}
+
+.option-row {
+  display: flex;
+  gap: 16rpx;
+}
+
+.option-btn {
+  flex: 1;
+  padding: 24rpx;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.option-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.theme-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.theme-item {
+  width: calc(33.33% - 12rpx);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 16rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16rpx;
+  border: 2rpx solid transparent;
+}
+
+.theme-item.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.theme-icon {
+  font-size: 40rpx;
+  margin-bottom: 8rpx;
+}
+
+.theme-name {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.toggle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+  font-size: 30rpx;
+}
+
+.toggle {
+  width: 88rpx;
+  height: 48rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 24rpx;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.toggle.on {
+  background: rgba(100, 200, 100, 0.6);
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 4rpx;
+  left: 4rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.toggle.on .toggle-knob {
+  left: 44rpx;
+}
+
+.achievements-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 16rpx;
+  padding: 32rpx;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 16rpx;
+  border: 1rpx solid rgba(255, 215, 0, 0.2);
+}
+
+.achievement-count {
+  font-size: 56rpx;
+  font-weight: 600;
+  color: #FFD700;
+}
+
+.achievement-label {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.danger-btn {
+  padding: 28rpx;
+  text-align: center;
+  background: rgba(220, 53, 69, 0.2);
+  border-radius: 16rpx;
+  color: #ff6b6b;
+  font-size: 28rpx;
+  border: 1rpx solid rgba(220, 53, 69, 0.3);
+}

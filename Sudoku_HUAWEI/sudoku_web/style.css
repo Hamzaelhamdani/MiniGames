@@ -1,0 +1,318 @@
+:root {
+    --bg-color: #FF7900;
+    --board-bg: #ffffff;
+    --primary-color: #000000;
+    --secondary-color: #a29bfe;
+    --text-color: #2d3436;
+    --border-color: #dfe6e9;
+    --thick-border-color: #2d3436;
+    --cell-hover: #f8f9fa;
+    --cell-selected: #e8f0fe;
+    --success-color: #00b894;
+    --error-color: #d63031;
+    --font-family: 'Outfit', sans-serif;
+}
+
+/* Screen management */
+.screen {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Start Screen Styles */
+.difficulty-menu {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.diff-option {
+    padding: 1rem 2rem;
+    background: #dfe6e9;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+}
+
+.diff-option:hover {
+    transform: translateY(-2px);
+    background: #b2bec3;
+}
+
+.diff-option.selected {
+    background: #e8f0fe;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(108, 92, 231, 0.2);
+}
+
+.big-btn {
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+    margin-top: 1rem;
+    background: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.game-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Override existing header styles/cleanup */
+.header-controls {
+    display: none;
+}
+
+/* Removed from HTML but good safety */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background: var(--board-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 95%;
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+p {
+    color: #636e72;
+    font-weight: 300;
+}
+
+.header-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.difficulty-selector {
+    display: flex;
+    background: #dfe6e9;
+    padding: 0.25rem;
+    border-radius: 12px;
+}
+
+.diff-btn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-weight: 600;
+    color: #636e72;
+    transition: all 0.2s;
+}
+
+.diff-btn.active {
+    background-color: var(--board-bg);
+    color: var(--primary-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.timer {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    font-variant-numeric: tabular-nums;
+    background: #e1e9f0;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    border: 2pt solid var(--thick-border-color);
+    margin-bottom: 2rem;
+    background-color: var(--thick-border-color);
+    gap: 1px;
+    width: min(10vmin, 700px);
+    margin: 0 auto 2rem auto;
+}
+
+.cell {
+    background-color: var(--board-bg);
+    aspect-ratio: 1 / 1;
+    border: none;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    font-weight: 400;
+    color: var(--text-color);
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    appearance: none;
+    /* Remove number spinner */
+}
+
+/* Hide number input spinners */
+.cell::-webkit-inner-spin-button,
+.cell::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.cell:focus {
+    background-color: var(--cell-selected);
+}
+
+.cell.fixed {
+    font-weight: 600;
+    background-color: #f1f2f6;
+    color: #2d3436;
+}
+
+/* Thick borders for 3x3 grids */
+.cell:nth-child(3n) {
+    border-right: 2px solid var(--thick-border-color);
+}
+
+.cell:nth-child(9n) {
+    border-right: none;
+}
+
+.game-board>.cell:nth-child(n+19):nth-child(-n+27),
+.game-board>.cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid var(--thick-border-color);
+}
+
+/* Fix right border issue from nth-child(3n) colliding with grid gap/border */
+/* Actually, with gap: 1px and background color, we get borders. 
+   We need to specifically style the 3x3 blocks.
+   Let's use a different approach for borders to ensure 3x3 clarity.
+*/
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    border: 2px solid var(--thick-border-color);
+    gap: 0;
+    width: 100%;
+    margin: 0 auto 2rem auto;
+    /* Remove gap, handle borders manually */
+}
+
+.cell {
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Right border for 3rd and 6th column */
+.cell:nth-child(3n) {
+    border-right: 2px solid var(--thick-border-color);
+}
+
+/* No right border for last column */
+.cell:nth-child(9n) {
+    border-right: none;
+}
+
+/* Bottom border for 3rd and 6th row */
+/* This is tricky with plain grid items. 
+   Easier to use classes injected by JS or careful nth-child math.
+   Row 3: cells 19-27. Row 6: cells 46-54.
+*/
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid var(--thick-border-color);
+}
+
+/* No bottom border for last row (73-81) */
+.cell:nth-child(n+73) {
+    border-bottom: none;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.message {
+    margin-top: 1.5rem;
+    height: 1.5rem;
+    font-weight: 600;
+}
+
+/* Status styles */
+.cell.correct {
+    color: var(--success-color);
+}
+
+.cell.incorrect {
+    color: var(--error-color);
+    background-color: #fab1a0;
+}

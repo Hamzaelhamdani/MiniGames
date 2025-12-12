@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="logo-container">
+    <text class="logo-x">X</text>
+    <text class="logo-dash">-</text>
+    <text class="logo-o">O</text>
+  </view>
+  
+  <view class="menu">
+    <button class="menu-btn" bindtap="onRobotBtn">Play against Robot</button>
+    <button class="menu-btn" bindtap="onFriendBtn">Play against Friend</button>
+  </view>
+
+  <!-- Custom Difficulty Modal -->
+  <view class="modal-overlay" wx:if="{{showDifficultyModal}}">
+    <view class="modal-content">
+      <view class="modal-title" wx:if="{{gameType === 'robot'}}">Difficulty</view>
+      <view class="btn-group" wx:if="{{gameType === 'robot'}}">
+        <button class="modal-btn {{difficulty === 'easy' ? 'selected' : ''}}" bindtap="setDifficulty" data-level="easy">Easy</button>
+        <button class="modal-btn {{difficulty === 'medium' ? 'selected' : ''}}" bindtap="setDifficulty" data-level="medium">Medium</button>
+        <button class="modal-btn {{difficulty === 'hard' ? 'selected' : ''}}" bindtap="setDifficulty" data-level="hard">Hard</button>
+      </view>
+
+      <view class="modal-title section-title">Matches</view>
+      <view class="btn-group">
+        <button class="modal-btn {{series === 1 ? 'selected' : ''}}" bindtap="setSeries" data-count="{{1}}">1</button>
+        <button class="modal-btn {{series === 3 ? 'selected' : ''}}" bindtap="setSeries" data-count="{{3}}">3</button>
+        <button class="modal-btn {{series === 5 ? 'selected' : ''}}" bindtap="setSeries" data-count="{{5}}">5</button>
+      </view>
+
+      <button class="modal-btn start-action" bindtap="handleStartGame">START GAME</button>
+      <button class="modal-btn cancel" bindtap="closeModal">Cancel</button>
+    </view>
+  </view>
+</view>

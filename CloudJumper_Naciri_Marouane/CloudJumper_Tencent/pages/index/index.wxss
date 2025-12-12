@@ -1,0 +1,135 @@
+/**index.wxss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #1e90ff 0%, #87CEEB 40%, #b0e0e6 100%);
+  overflow: hidden;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  position: relative;
+}
+
+/* Logo Section */
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  z-index: 10;
+}
+
+.bird-container {
+  /* Static bird - no animation */
+}
+
+.bird-icon {
+  width: 100px;
+  height: 75px;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #e0db3bff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin-top: 15px;
+  font-family: Arial, sans-serif;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  margin-top: 8px;
+}
+
+/* High Score Section - Simple */
+.score-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  z-index: 10;
+}
+
+.trophy {
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.high-score-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Controls */
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Simple Play Button */
+.start-btn {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-btn::after {
+  border: none;
+}
+
+.btn-text {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.start-btn:active {
+  background: #45a049;
+}
+
+/* Ground */
+.ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, #8B4513 0%, #654321 50%, #3d2817 100%);
+  border-top: 6px solid #228B22;
+}
+
+.ground::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    #32CD32 0px,
+    #32CD32 20px,
+    #228B22 20px,
+    #228B22 40px
+  );
+}

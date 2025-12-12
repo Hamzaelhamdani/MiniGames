@@ -1,0 +1,214 @@
+/** index.wxss - Friendly & Human Style **/
+.page {
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #222222; /* Dark Grey */
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.03) 0,
+    rgba(255, 255, 255, 0.03) 2rpx,
+    transparent 2rpx,
+    transparent 30rpx
+  );
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #ffffff; /* White text */
+}
+
+/* Start Screen */
+.start-screen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80rpx);
+  gap: 32rpx;
+}
+
+.start-screen .title {
+  font-size: 64rpx;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 16rpx;
+  text-align: center;
+  letter-spacing: -1.5rpx;
+  line-height: 1.1;
+}
+
+.start-screen .subtitle {
+  font-size: 34rpx;
+  color: #dddddd;
+  font-weight: 400;
+  margin-bottom: 64rpx;
+  text-align: center;
+  max-width: 80%;
+  line-height: 1.5;
+}
+
+.start-btn, .restart-btn {
+  background-color: #ff7900;
+  color: #ffffff;
+  padding: 36rpx 80rpx;
+  border-radius: 100rpx; /* Friendly pill shape */
+  font-weight: 600;
+  font-size: 34rpx;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(255, 121, 0, 0.25); /* Warm, soft shadow */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.start-btn:active, .restart-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(255, 121, 0, 0.2);
+}
+
+/* Quiz Screen */
+.quiz-screen {
+  width: 100%;
+  max-width: 640rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80rpx);
+}
+
+.question-card {
+  background: #ffffff;
+  width: 100%;
+  border-radius: 48rpx; /* Soft large radius */
+  padding: 56rpx 48rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.05); /* very subtle float */
+}
+
+.question-header {
+  margin-bottom: 32rpx;
+}
+
+.q-counter {
+  font-size: 26rpx;
+  color: #888888;
+  font-weight: 600;
+  letter-spacing: 0.5rpx;
+}
+
+.question-text {
+  font-size: 42rpx;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 120rpx; /* Increased padding/space as requested */
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.option-btn {
+  background-color: #f7f7f7;
+  border: 2rpx solid transparent;
+  padding: 32rpx 40rpx;
+  border-radius: 24rpx; /* Soft rect */
+  display: flex;
+  align-items: center;
+  gap: 32rpx;
+  transition: all 0.2s;
+}
+
+.option-btn:first-child {
+  margin-top: 40rpx;
+}
+
+.option-btn:active {
+  background-color: #eeeeee;
+  transform: scale(0.99);
+}
+
+.option-badge {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 28rpx;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-radius: 50%; /* Perfect circle */
+}
+
+.option-text {
+  font-size: 30rpx;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+/* Result Screen */
+.result-screen {
+  width: 100%;
+  max-width: 640rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80rpx);
+  gap: 48rpx;
+}
+
+.result-card {
+  text-align: center;
+  padding: 10rpx 0;
+}
+
+.result-title {
+  display: block;
+  font-size: 56rpx;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 16rpx;
+  letter-spacing: -1rpx;
+}
+
+.result-score {
+  display: block;
+  font-size: 38rpx;
+  color: #ff7900;
+  font-weight: 700;
+  margin-bottom: 32rpx;
+}
+
+.result-msg {
+  display: block;
+  font-size: 30rpx;
+  color: #555555;
+  line-height: 1.5;
+  font-weight: 400;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+/* Minimal animations */
+.celebrate, .shake {
+  /* Simple colored borders for feedback instead of complex heavy animations */
+  border-radius: 8rpx;
+  padding: 40rpx;
+  background-color: #fafafa;
+}
+
+.celebrate {
+  border-left: 8rpx solid #ff7900;
+}
+
+.shake {
+  border-left: 8rpx solid #000000;
+}
+
+/* Responsive */
+@media (min-width: 700rpx) {
+  .page { padding: 60rpx; }
+}

@@ -1,0 +1,18 @@
+<!--pages/paddleSelect/paddleSelect.wxml-->
+<view class="page-container">
+  <view class="page-title">Choose Your Paddle</view>
+  
+  <view class="paddle-options">
+    <button class="paddle-btn" bindtap="onSelectPaddle" data-paddle="white">
+      <view class="paddle-preview white-paddle"></view>
+      <text class="paddle-title">White Paddle</text>
+      <text class="paddle-desc">Left side player</text>
+    </button>
+    
+    <button class="paddle-btn" bindtap="onSelectPaddle" data-paddle="orange">
+      <view class="paddle-preview orange-paddle"></view>
+      <text class="paddle-title">Orange Paddle</text>
+      <text class="paddle-desc">Right side player</text>
+    </button>
+  </view>
+</view>

@@ -1,0 +1,592 @@
+/* ===========================
+   DESIGN TOKENS & RESET
+   =========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colors */
+    --color-black: #0a0a0a;
+    --color-white: #ffffff;
+    --color-orange: #ff6b35;
+    --color-orange-light: #ff8555;
+    --color-orange-dark: #e55a2b;
+    --color-gray: #1a1a1a;
+    --color-gray-light: #2a2a2a;
+    --color-gray-lighter: #3a3a3a;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 4rem;
+
+    /* Typography */
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+    --font-size-huge: 3rem;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+
+    /* Border Radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--color-black);
+    color: var(--color-white);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ===========================
+   PAGE NAVIGATION
+   =========================== */
+
+.page {
+    display: none;
+    min-height: 100vh;
+    animation: fadeIn 0.4s ease;
+}
+
+.page.active {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================
+   HEADER
+   =========================== */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(180deg, var(--color-gray) 0%, transparent 100%);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.logo-icon {
+    font-size: var(--font-size-xxl);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.logo h1 {
+    font-size: var(--font-size-xxl);
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    background: linear-gradient(135deg, var(--color-white) 0%, var(--color-orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.settings-btn {
+    background: var(--color-gray-light);
+    border: 2px solid var(--color-gray-lighter);
+    color: var(--color-white);
+    font-size: var(--font-size-xl);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+}
+
+.settings-btn:hover {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    transform: rotate(90deg);
+}
+
+/* ===========================
+   HOME PAGE
+   =========================== */
+
+.home-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===========================
+   BUTTONS
+   =========================== */
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange-dark) 100%);
+    color: var(--color-white);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(255, 107, 53, 0.5);
+}
+
+.primary-btn:active {
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: transparent;
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+}
+
+.secondary-btn:hover {
+    background: var(--color-white);
+    color: var(--color-black);
+    transform: translateY(-2px);
+}
+
+/* ===========================
+   SELECTION PAGES
+   =========================== */
+
+.selection-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-xl);
+}
+
+.page-title {
+    font-size: var(--font-size-huge);
+    font-weight: 800;
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.mode-options,
+.difficulty-options,
+.paddle-options {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 900px;
+}
+
+.mode-btn,
+.difficulty-btn,
+.paddle-btn {
+    background: var(--color-gray);
+    border: 3px solid var(--color-gray-lighter);
+    color: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    min-width: 250px;
+    text-align: center;
+}
+
+.mode-btn:hover,
+.difficulty-btn:hover,
+.paddle-btn:hover {
+    border-color: var(--color-orange);
+    background: var(--color-gray-light);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.mode-icon,
+.difficulty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.mode-btn h3,
+.difficulty-btn h3,
+.paddle-btn h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 700;
+}
+
+.mode-btn p,
+.difficulty-btn p,
+.paddle-btn p {
+    font-size: var(--font-size-base);
+    color: #aaa;
+}
+
+/* Paddle Preview */
+.paddle-preview {
+    width: 20px;
+    height: 100px;
+    margin: 0 auto var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+.white-paddle {
+    background: var(--color-white);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.orange-paddle {
+    background: var(--color-orange);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+}
+
+/* ===========================
+   GAME PAGE
+   =========================== */
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md);
+}
+
+/* Scoreboard */
+.scoreboard {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    background: var(--color-gray);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--color-gray-lighter);
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.player-label {
+    font-size: var(--font-size-sm);
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.score {
+    font-size: var(--font-size-huge);
+    font-weight: 900;
+    color: var(--color-orange);
+}
+
+.score-divider {
+    font-size: var(--font-size-xxl);
+    color: var(--color-gray-lighter);
+}
+
+/* Canvas */
+#gameCanvas {
+    border: 3px solid var(--color-gray-lighter);
+    border-radius: var(--radius-sm);
+    background: var(--color-black);
+    box-shadow: 0 0 50px rgba(255, 107, 53, 0.2);
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.control-btn {
+    background: var(--color-gray);
+    border: 2px solid var(--color-gray-lighter);
+    color: var(--color-white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+}
+
+.control-btn:hover {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    transform: translateY(-2px);
+}
+
+/* Game Over Screen */
+.game-over-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.game-over-screen.hidden {
+    display: none;
+}
+
+.game-over-content {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    background: var(--color-gray);
+    border: 3px solid var(--color-orange);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 0 50px rgba(255, 107, 53, 0.5);
+}
+
+#gameOverTitle {
+    font-size: var(--font-size-huge);
+    font-weight: 900;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-orange);
+}
+
+#gameOverMessage {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.game-over-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+/* ===========================
+   MOBILE TOUCH CONTROLS
+   =========================== */
+
+.touch-controls {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    z-index: 100;
+}
+
+.touch-control-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+}
+
+.touch-btn {
+    flex: 1;
+    background: rgba(255, 107, 53, 0.3);
+    border: 2px solid var(--color-orange);
+    color: var(--color-white);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.touch-btn:active {
+    background: rgba(255, 107, 53, 0.6);
+    transform: scale(0.95);
+}
+
+.touch-btn.left-control {
+    border-color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.touch-btn.left-control:active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Show touch controls on mobile */
+@media (max-width: 768px) {
+    .touch-controls {
+        display: flex;
+    }
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .mode-options,
+    .difficulty-options,
+    .paddle-options {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .mode-btn,
+    .difficulty-btn,
+    .paddle-btn {
+        min-width: auto;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .page-title {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .header {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .logo h1 {
+        font-size: var(--font-size-xl);
+    }
+
+    .logo-icon {
+        font-size: var(--font-size-xl);
+    }
+
+    .scoreboard {
+        gap: var(--spacing-sm);
+        padding: var(--spacing-xs) var(--spacing-md);
+    }
+
+    .score {
+        font-size: var(--font-size-xl);
+    }
+
+    .player-label {
+        font-size: 0.75rem;
+    }
+
+    #gameCanvas {
+        max-width: 100%;
+        height: auto !important;
+    }
+
+    .game-container {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-sm);
+    }
+
+    .game-controls {
+        flex-wrap: wrap;
+    }
+
+    .control-btn {
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .primary-btn {
+        font-size: var(--font-size-lg);
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .game-over-content {
+        padding: var(--spacing-lg);
+        margin: var(--spacing-md);
+    }
+
+    #gameOverTitle {
+        font-size: var(--font-size-xl);
+    }
+
+    #gameOverMessage {
+        font-size: var(--font-size-lg);
+    }
+
+    .game-over-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .game-over-buttons button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .mode-icon,
+    .difficulty-icon {
+        font-size: 3rem;
+    }
+}

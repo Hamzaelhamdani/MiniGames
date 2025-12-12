@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping Pong Game</title>
+    <meta name="description" content="Classic Ping Pong game with AI and multiplayer modes">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🏓</div>
+                <h1>PONG</h1>
+            </div>
+            <button id="settingsBtn" class="settings-btn">⚙️</button>
+        </header>
+
+        <main class="home-main">
+            <button id="startGameBtn" class="primary-btn">Start New Game</button>
+        </main>
+    </div>
+
+    <!-- GAME MODE SELECTION PAGE -->
+    <div id="gameModePage" class="page">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🏓</div>
+                <h1>PONG</h1>
+            </div>
+        </header>
+
+        <main class="selection-main">
+            <h2 class="page-title">Choose Game Mode</h2>
+            <div class="mode-options">
+                <button id="vsAiBtn" class="mode-btn">
+                    <div class="mode-icon">🤖</div>
+                    <h3>Play vs AI</h3>
+                    <p>Challenge the computer</p>
+                </button>
+                <button id="vsFriendBtn" class="mode-btn">
+                    <div class="mode-icon">👥</div>
+                    <h3>Play vs Friend</h3>
+                    <p>Local multiplayer</p>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- DIFFICULTY SELECTION PAGE (for AI mode) -->
+    <div id="difficultyPage" class="page">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🏓</div>
+                <h1>PONG</h1>
+            </div>
+        </header>
+
+        <main class="selection-main">
+            <h2 class="page-title">Choose Difficulty</h2>
+            <div class="difficulty-options">
+                <button class="difficulty-btn" data-difficulty="easy">
+                    <div class="difficulty-icon">😊</div>
+                    <h3>Easy</h3>
+                    <p>Relaxed gameplay</p>
+                </button>
+                <button class="difficulty-btn" data-difficulty="medium">
+                    <div class="difficulty-icon">😐</div>
+                    <h3>Medium</h3>
+                    <p>Balanced challenge</p>
+                </button>
+                <button class="difficulty-btn" data-difficulty="hard">
+                    <div class="difficulty-icon">😤</div>
+                    <h3>Hard</h3>
+                    <p>Expert level</p>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- PADDLE SELECTION PAGE (for Friend mode) -->
+    <div id="paddleSelectionPage" class="page">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🏓</div>
+                <h1>PONG</h1>
+            </div>
+        </header>
+
+        <main class="selection-main">
+            <h2 class="page-title">Choose Your Paddle</h2>
+            <div class="paddle-options">
+                <button class="paddle-btn" data-paddle="white">
+                    <div class="paddle-preview white-paddle"></div>
+                    <h3>White Paddle</h3>
+                    <p>Controls: W / S</p>
+                </button>
+                <button class="paddle-btn" data-paddle="orange">
+                    <div class="paddle-preview orange-paddle"></div>
+                    <h3>Orange Paddle</h3>
+                    <p>Controls: ↑ / ↓</p>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- GAME PAGE -->
+    <div id="gamePage" class="page">
+        <div class="game-container">
+            <!-- Scoreboard -->
+            <div class="scoreboard">
+                <div class="score-item">
+                    <span class="player-label" id="player1Label">Player 1</span>
+                    <span class="score" id="player1Score">0</span>
+                </div>
+                <div class="score-divider">:</div>
+                <div class="score-item">
+                    <span class="score" id="player2Score">0</span>
+                    <span class="player-label" id="player2Label">Player 2</span>
+                </div>
+            </div>
+
+            <!-- Game Canvas -->
+            <canvas id="gameCanvas"></canvas>
+
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <button id="pauseBtn" class="control-btn">Pause</button>
+                <button id="restartBtn" class="control-btn">Restart</button>
+                <button id="homeBtn" class="control-btn">Home</button>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="game-over-screen hidden">
+                <div class="game-over-content">
+                    <h2 id="gameOverTitle">Game Over</h2>
+                    <p id="gameOverMessage"></p>
+                    <div class="game-over-buttons">
+                        <button id="playAgainBtn" class="primary-btn">Play Again</button>
+                        <button id="backHomeBtn" class="secondary-btn">Back to Home</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Touch Controls for Mobile -->
+            <div id="touchControls" class="touch-controls">
+                <div class="touch-control-area">
+                    <button id="touchUpLeft" class="touch-btn left-control">▲</button>
+                    <button id="touchDownLeft" class="touch-btn left-control">▼</button>
+                </div>
+                <div class="touch-control-area">
+                    <button id="touchUpRight" class="touch-btn">▲</button>
+                    <button id="touchDownRight" class="touch-btn">▼</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

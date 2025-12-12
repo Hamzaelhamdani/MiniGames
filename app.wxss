@@ -1,0 +1,46 @@
+/* Global Styles */
+page {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  height: 100%;
+}
+
+/* Common Button Styles */
+.primary-btn {
+  background: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
+  color: #ffffff;
+  border: none;
+  padding: 30rpx 60rpx;
+  font-size: 36rpx;
+  font-weight: 700;
+  border-radius: 20rpx;
+  box-shadow: 0 8rpx 40rpx rgba(255, 107, 53, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 4rpx solid #ffffff;
+  padding: 30rpx 60rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 20rpx;
+}
+
+/* Common Container */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 40rpx;
+}
+
+.page-title {
+  font-size: 60rpx;
+  font-weight: 800;
+  margin-bottom: 60rpx;
+  text-align: center;
+}

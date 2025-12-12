@@ -1,0 +1,24 @@
+<!--pages/difficulty/difficulty.wxml-->
+<view class="page-container">
+  <view class="page-title">Choose Difficulty</view>
+  
+  <view class="difficulty-options">
+    <button class="difficulty-btn" bindtap="onSelectDifficulty" data-difficulty="easy">
+      <text class="difficulty-icon">😊</text>
+      <text class="difficulty-title">Easy</text>
+      <text class="difficulty-desc">Relaxed gameplay</text>
+    </button>
+    
+    <button class="difficulty-btn" bindtap="onSelectDifficulty" data-difficulty="medium">
+      <text class="difficulty-icon">😐</text>
+      <text class="difficulty-title">Medium</text>
+      <text class="difficulty-desc">Balanced challenge</text>
+    </button>
+    
+    <button class="difficulty-btn" bindtap="onSelectDifficulty" data-difficulty="hard">
+      <text class="difficulty-icon">😤</text>
+      <text class="difficulty-title">Hard</text>
+      <text class="difficulty-desc">Expert level</text>
+    </button>
+  </view>
+</view>

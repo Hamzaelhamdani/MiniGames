@@ -1,0 +1,18 @@
+<!--pages/gameMode/gameMode.wxml-->
+<view class="page-container">
+  <view class="page-title">Choose Game Mode</view>
+  
+  <view class="mode-options">
+    <button class="mode-btn" bindtap="onSelectAI">
+      <text class="mode-icon">🤖</text>
+      <text class="mode-title">Play vs AI</text>
+      <text class="mode-desc">Challenge the computer</text>
+    </button>
+    
+    <button class="mode-btn" bindtap="onSelectFriend">
+      <text class="mode-icon">👥</text>
+      <text class="mode-title">Play vs Friend</text>
+      <text class="mode-desc">Local multiplayer</text>
+    </button>
+  </view>
+</view>

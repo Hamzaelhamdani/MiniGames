@@ -1,0 +1,125 @@
+<view class='game-container' bindtouchmove='onDragMove' bindtouchend='onDragEnd' bindtouchcancel='onDragEnd'>
+  <view class='header'>
+    <view class='stats-row'>
+      <view class='stat-box'>
+        <text class='stat-icon'>♦        </text>
+        <view class='stat-info'>
+          <text class='stat-value'>{{moves}}          </text>
+          <text class='stat-label'>Coups          </text>
+        </view>
+      </view>
+      <view class='stat-box'>
+        <text class='stat-icon timer-icon'>◷        </text>
+        <view class='stat-info'>
+          <text class='stat-value'>{{formattedTime}}          </text>
+          <text class='stat-label'>Temps          </text>
+        </view>
+      </view>
+    </view>
+    <view class='action-buttons'>
+      <button class='action-btn hint-btn' bindtap='showHint'>
+        <text class='action-icon'>?        </text>
+        <text class='action-text'>Indice        </text>
+      </button>
+      <button class="action-btn undo-btn {{!canUndo ? 'disabled' : ''}}" bindtap='undo' disabled='{{!canUndo}}'>
+        <text class='action-icon'>↩        </text>
+        <text class='action-text'>Annuler        </text>
+      </button>
+      <button class='action-btn restart-btn' bindtap='restartGame'>
+        <text class='action-icon'>↻        </text>
+        <text class='action-text'>Nouveau        </text>
+      </button>
+    </view>
+  </view>
+  <view ma:if='{{canAutoComplete && !isAutoCompleting && !gameWon}}' class='auto-complete-bar'>
+    <button class='btn-auto-complete' bindtap='autoComplete'>
+Auto-Compléter
+    </button>
+  </view>
+  <view class='top-row'>
+    <view class="pile stock {{showingHint && hintSource && hintSource.type === 'stock' ? 'hint-source' : ''}} {{showingHint && hintTarget && hintTarget.type === 'stock' ? 'hint-target' : ''}}" bindtap='onStockTap'>
+      <view ma:if='{{stock.length > 0}}' class='card card-back' style='background:#000 !important;'>
+        <text class='card-count'>{{stock.length}}        </text>
+      </view>
+      <view ma:else class="empty-slot stock-empty clickable {{showingHint && hintSource && hintSource.type === 'waste-reset' ? 'hint-source' : ''}}">
+        <text class='reset-icon'>↻        </text>
+        <text class='reset-label'>Reset        </text>
+      </view>
+    </view>
+    <view class="pile waste {{showingHint && hintSource && hintSource.type === 'waste' ? 'hint-source' : ''}} {{showingHint && hintTarget && hintTarget.type === 'waste' ? 'hint-target' : ''}}" catchtouchstart='onWasteDragStart' bindtap='onWasteTap'>
+      <view ma:if='{{waste.length > 0}}' class="card {{waste[waste.length-1].color}} {{selectedSource && selectedSource.type === 'waste' && !isDragging ? 'selected' : ''}} {{isDragging && selectedSource && selectedSource.type === 'waste' ? 'dragging-source' : ''}}">
+        <text class='card-value top'>{{waste[waste.length-1].value}}        </text>
+        <text class='card-suit top'>{{waste[waste.length-1].symbol}}        </text>
+        <text class='card-suit center'>{{waste[waste.length-1].symbol}}        </text>
+      </view>
+      <view ma:else class='empty-slot'>
+      </view>
+    </view>
+    <view class='spacer'>
+    </view>
+    <view class='foundations'>
+      <view ma:for='{{foundations}}' ma:key='index' class="pile foundation {{showingHint && hintTarget && hintTarget.type === 'foundation' && hintTarget.index === index ? 'hint-target' : ''}}" data-index='{{index}}' bindtap='onFoundationTap'>
+        <view ma:if='{{item.length > 0}}' class='card {{item[item.length-1].color}}'>
+          <text class='card-value top'>{{item[item.length-1].value}}          </text>
+          <text class='card-suit top'>{{item[item.length-1].symbol}}          </text>
+          <text class='card-suit center'>{{item[item.length-1].symbol}}          </text>
+        </view>
+        <view ma:else class='empty-slot foundation-empty'>
+          <text class='foundation-label'>{{index === 0 ? '♠' : index === 1 ? '♥' : index === 2 ? '♦' : '♣'}}          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <scroll-view class='tableau-container' scroll-y='true'>
+    <view class='tableau'>
+      <view ma:for='{{tableau}}' ma:key='index' ma:for-index='colIdx' class="tableau-column {{showingHint && hintTarget && hintTarget.type === 'tableau' && hintTarget.col === colIdx ? 'hint-target-col' : ''}}">
+        <view ma:if='{{item.length === 0}}' class="empty-slot tableau-empty {{showingHint && hintTarget && hintTarget.type === 'tableau' && hintTarget.col === colIdx ? 'hint-target' : ''}}" data-col='{{colIdx}}' bindtap='onEmptyColumnTap'>
+          <text class='empty-label'>K          </text>
+        </view>
+        <view ma:for='{{item}}' ma:for-item='card' ma:for-index='cardIdx' ma:key='id' class="tableau-card {{isDragging && selectedSource && selectedSource.type === 'tableau' && selectedSource.col === colIdx && cardIdx >= selectedSource.cardIndex ? 'dragging-source' : ''}} {{selectedSource && selectedSource.type === 'tableau' && selectedSource.col === colIdx && cardIdx >= selectedSource.cardIndex && !isDragging ? 'selected' : ''}} {{showingHint && hintSource && hintSource.type === 'tableau' && hintSource.col === colIdx && cardIdx >= hintSource.cardIndex ? 'hint-source' : ''}} {{showingHint && hintTarget && hintTarget.type === 'tableau' && hintTarget.col === colIdx && cardIdx === item.length - 1 ? 'hint-target' : ''}}" style='top: {{cardIdx * (item.length > 10 ? 30 : item.length > 8 ? 35 : 45)}}rpx; z-index: {{cardIdx + 1}};' data-col='{{colIdx}}' data-cardindex='{{cardIdx}}' catchtouchstart='onTableauDragStart' bindtap='onTableauCardTap'>
+          <view ma:if='{{!card.faceUp}}' class='card card-back' style='background:#000 !important;'>
+          </view>
+          <view ma:else class='card {{card.color}}'>
+            <text class='card-value top'>{{card.value}}            </text>
+            <text class='card-suit top'>{{card.symbol}}            </text>
+            <text class='card-suit center'>{{card.symbol}}            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view ma:if='{{isDragging && selectedCards.length > 0}}' class='drag-layer' style='left: {{dragCurrentX - 45}}px; top: {{dragCurrentY - 65}}px;'>
+    <view ma:for='{{selectedCards}}' ma:key='id' class='card {{item.color}} drag-card' style='top: {{index * 30}}px; z-index: {{1000 + index}};'>
+      <text class='card-value top'>{{item.value}}      </text>
+      <text class='card-suit top'>{{item.symbol}}      </text>
+      <text class='card-suit center'>{{item.symbol}}      </text>
+    </view>
+  </view>
+  <view ma:if='{{showWinModal}}' class='win-modal'>
+    <view class='win-content'>
+      <view class='win-trophy'>
+        <text class='trophy-icon'>♔        </text>
+      </view>
+      <text class='win-title'>Victoire !      </text>
+      <text class='win-subtitle'>Félicitations, vous avez gagné !      </text>
+      <view class='win-stats'>
+        <view class='win-stat'>
+          <text class='win-stat-value'>{{moves}}          </text>
+          <text class='win-stat-label'>Coups          </text>
+        </view>
+        <view class='win-stat'>
+          <text class='win-stat-value'>{{formattedTime}}          </text>
+          <text class='win-stat-label'>Temps          </text>
+        </view>
+      </view>
+      <view class='win-actions'>
+        <button class='btn-primary' bindtap='restartGame'>
+Nouvelle Partie
+        </button>
+        <button class='btn-secondary' bindtap='goHome'>
+Accueil
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,90 @@
+/**app.wxss - Solitaire Global Styles**/
+
+page {
+  --green-dark: #1B5E20;
+  --green-main: #2E7D32;
+  --green-light: #4CAF50;
+  --green-table: #388E3C;
+  --card-white: #FFFFFF;
+  --card-red: #FF7900;
+  --card-black: #212121;
+  --gold: #FFD700;
+  --shadow: rgba(0, 0, 0, 0.3);
+  
+  background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #1B5E20 100%);
+  color: #FFFFFF;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+  min-height: 100vh;
+}
+
+/* Card Base */
+.card {
+  width: 90rpx;
+  height: 130rpx;
+  border-radius: 12rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 12rpx var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.card-back {
+  background: #000000;
+  border: 3rpx solid #FF7900;
+}
+
+.card-back::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50rpx;
+  height: 50rpx;
+  background: repeating-linear-gradient(
+    45deg,
+    #FF7900,
+    #FF7900 4rpx,
+    #000000 4rpx,
+    #000000 8rpx
+  );
+  border-radius: 8rpx;
+}
+
+.card.red {
+  color: var(--card-red);
+}
+
+.card.black {
+  color: var(--card-black);
+}
+
+/* Empty slot */
+.empty-slot {
+  width: 90rpx;
+  height: 130rpx;
+  border-radius: 12rpx;
+  border: 3rpx dashed rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+  color: white;
+  border: none;
+  border-radius: 24rpx;
+  padding: 28rpx 56rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+  opacity: 0.9;
+}

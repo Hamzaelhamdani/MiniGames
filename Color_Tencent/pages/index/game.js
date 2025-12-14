@@ -66,7 +66,18 @@ class Game {
     }
 
     spawnBlock() {
-        const prevBlock = this.stack[this.stack.length - 1];
+        // Defensive check for stack integrity
+        if (!this.stack || this.stack.length === 0) {
+            console.error('Critical Error: Stack is empty in spawnBlock');
+            return;
+        }
+
+        const prevBlock = this.getLastStackItem();
+        if (!prevBlock) {
+             console.error('Critical Error: prevBlock is undefined');
+             return;
+        }
+
         const newIndex = this.stack.length;
 
         this.currentBlock = {
@@ -89,7 +100,11 @@ class Game {
 
         this.direction = 1;
 
-        const diffSettings = DIFFICULTY[this.difficulty];
+        let diffSettings = DIFFICULTY[this.difficulty];
+        if (!diffSettings) {
+            this.difficulty = 'normal';
+            diffSettings = DIFFICULTY.normal;
+        }
         const baseSpeed = 0.18 + (newIndex * 0.008);
         this.speed = Math.min(0.5, baseSpeed) * diffSettings.speedMultiplier;
     }
@@ -111,7 +126,8 @@ class Game {
         }
 
         // Debris physics - realistic falling animation
-        for (let i = this.debris.length - 1; i >= 0; i--) {
+        if (this.debris) {
+            for (let i = this.debris.length - 1; i >= 0; i--) {
             const d = this.debris[i];
 
             // Gravity acceleration
@@ -135,6 +151,7 @@ class Game {
                 this.debris.splice(i, 1);
             }
         }
+        }
 
         // Fade effects
         if (this.perfectEffect) {
@@ -157,9 +174,26 @@ class Game {
     placeBlock() {
         if (!this.isPlaying || !this.currentBlock) return;
 
+        // Defensive check for stack
+        if (!this.stack || this.stack.length === 0) {
+            console.error('Critical Error: Stack is empty in placeBlock');
+            return;
+        }
+
         const current = this.currentBlock;
-        const prev = this.stack[this.stack.length - 1];
-        const diffSettings = DIFFICULTY[this.difficulty];
+        const prev = this.getLastStackItem();
+
+        if (!prev) {
+             console.error('Critical Error: Previous block is undefined');
+             return;
+        }
+
+        let diffSettings = DIFFICULTY[this.difficulty];
+        if (!diffSettings) {
+            console.warn('Invalid difficulty:', this.difficulty, 'defaulting to normal');
+            this.difficulty = 'normal';
+            diffSettings = DIFFICULTY.normal;
+        }
         const TOLERANCE = diffSettings.tolerance;
 
         Audio.playTap();
@@ -317,7 +351,9 @@ class Game {
     }
 
     addFloatingText(text, color) {
-        const block = this.currentBlock || this.stack[this.stack.length - 1];
+        const block = this.currentBlock || this.getLastStackItem();
+        if (!block) return;
+        
         this.floatingTexts.push({
             text,
             color,
@@ -357,6 +393,17 @@ class Game {
 
     getFloatingTexts() {
         return this.floatingTexts;
+    }
+
+    // Helper for safe stack access
+    getLastStackItem() {
+        if (!this.stack || this.stack.length === 0) return null;
+        return this.stack[this.stack.length - 1];
+    }
+    
+    getStackItem(index) {
+        if (!this.stack || index < 0 || index >= this.stack.length) return null;
+        return this.stack[index];
     }
 }
 

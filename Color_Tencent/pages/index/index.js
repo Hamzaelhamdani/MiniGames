@@ -21,19 +21,39 @@ Page({
     themes: []
   },
 
-  onLoad() {
-    const highScore = wx.getStorageSync('climbcolor_high_score') || 0;
-    const settings = wx.getStorageSync('climbcolor_settings') || {};
-
-    this.setData({
-      highScore,
-      difficulty: settings.difficulty || 'normal',
-      theme: settings.theme || 'default',
-      sfxEnabled: settings.sfxEnabled !== false,
-      musicEnabled: settings.musicEnabled !== false,
-      vibrationEnabled: settings.vibrationEnabled !== false,
-      themes: getThemeList()
+  // Safer wrapper for setData
+  safeSetData(data) {
+    if (!data || typeof data !== 'object') {
+      console.warn('Invalid data passed to safeSetData', data);
+      return;
+    }
+    // Sanitize data keys to ensure they are valid strings and values are safe
+    const sanitized = {};
+    Object.keys(data).forEach(key => {
+      if (typeof key === 'string' && data[key] !== undefined) {
+        sanitized[key] = data[key];
+      }
     });
+    this.setData(sanitized);
+  },
+
+  onLoad() {
+    try {
+      const highScore = wx.getStorageSync('climbcolor_high_score') || 0;
+      const settings = wx.getStorageSync('climbcolor_settings') || {};
+  
+      this.safeSetData({
+        highScore,
+        difficulty: settings.difficulty || 'normal',
+        theme: settings.theme || 'default',
+        sfxEnabled: settings.sfxEnabled !== false,
+        musicEnabled: settings.musicEnabled !== false,
+        vibrationEnabled: settings.vibrationEnabled !== false,
+        themes: getThemeList()
+      });
+    } catch (err) {
+      console.error('Error in onLoad:', err);
+    }
   },
 
   onReady() {
@@ -65,7 +85,9 @@ Page({
         this.game = new Game(
           this.renderer,
           (score) => {
-            this.setData({ score });
+            if (this.data.isPlaying) {
+              this.safeSetData({ score: typeof score === 'number' ? score : 0 });
+            }
           },
           (finalScore) => {
             const playTime = this.game.getPlayTime();
@@ -73,10 +95,10 @@ Page({
 
             if (isNewHighScore) {
               wx.setStorageSync('climbcolor_high_score', finalScore);
-              this.setData({ highScore: finalScore });
+              this.safeSetData({ highScore: finalScore });
             }
 
-            this.setData({
+            this.safeSetData({
               isGameOver: true,
               isPlaying: false,
               playTime: playTime,
@@ -89,7 +111,11 @@ Page({
             Audio.stopBackgroundMusic();
           },
           {
-            onComboChange: (combo) => this.setData({ combo })
+            onComboChange: (combo) => {
+              if (this.data.isPlaying) {
+                this.safeSetData({ combo: typeof combo === 'number' ? combo : 0 });
+              }
+            }
           }
         );
 
@@ -98,23 +124,29 @@ Page({
         // Optimized render loop
         let lastTime = 0;
         const loop = (time) => {
-          if (time - lastTime >= 16) {
-            this.game.tick(Date.now());
-            this.renderer.render({
-              stack: this.game.stack,
-              debris: this.game.debris,
-              currentBlock: this.game.currentBlock,
-              isGameOver: this.data.isGameOver,
-              perfectEffect: this.game.perfectEffect,
-              floatingTexts: this.game.getFloatingTexts(),
-              score: this.data.score,
-              combo: this.data.combo,
-              isPlaying: this.data.isPlaying,
-              highScore: this.data.highScore,
-              playTime: this.data.playTime,
-              isNewHighScore: this.data.isNewHighScore
-            });
-            lastTime = time;
+          try {
+            if (time - lastTime >= 16) {
+              if (this.game && this.renderer) {
+                this.game.tick(Date.now());
+                this.renderer.render({
+                  stack: this.game.stack || [],
+                  debris: this.game.debris || [],
+                  currentBlock: this.game.currentBlock,
+                  isGameOver: this.data.isGameOver,
+                  perfectEffect: this.game.perfectEffect,
+                  floatingTexts: this.game.getFloatingTexts ? this.game.getFloatingTexts() : [],
+                  score: this.data.score || 0,
+                  combo: this.data.combo || 0,
+                  isPlaying: this.data.isPlaying,
+                  highScore: this.data.highScore || 0,
+                  playTime: this.data.playTime || 0,
+                  isNewHighScore: this.data.isNewHighScore
+                });
+              }
+              lastTime = time;
+            }
+          } catch (err) {
+            console.error('Render loop error:', err);
           }
           canvas.requestAnimationFrame(loop);
         };
@@ -123,23 +155,33 @@ Page({
   },
 
   onTouchStart(e) {
-    if (this.data.isGameOver || !this.data.isPlaying) {
-      this.setData({
-        isGameOver: false,
-        isPlaying: true,
-        score: 0,
-        playTime: 0,
-        isNewHighScore: false
-      });
-      this.game.setDifficulty(this.data.difficulty);
-      this.game.start();
-      if (this.data.musicEnabled) {
-        Audio.startBackgroundMusic();
+    try {
+      // Defensive check: Game might not be initialized yet if user taps immediately
+      if (!this.game) {
+        console.warn('Game instance not ready yet');
+        return;
       }
-      return;
-    }
 
-    this.game.placeBlock();
+      if (this.data.isGameOver || !this.data.isPlaying) {
+        this.safeSetData({
+          isGameOver: false,
+          isPlaying: true,
+          score: 0,
+          playTime: 0,
+          isNewHighScore: false
+        });
+        this.game.setDifficulty(this.data.difficulty);
+        this.game.start();
+        if (this.data.musicEnabled) {
+          Audio.startBackgroundMusic();
+        }
+        return;
+      }
+
+      this.game.placeBlock();
+    } catch (err) {
+      console.error('Error in onTouchStart:', err);
+    }
   },
 
   onShareAppMessage() {

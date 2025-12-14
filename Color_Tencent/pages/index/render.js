@@ -446,6 +446,9 @@ class Renderer {
   }
 
   render(world) {
+    if (!world || !world.stack) {
+      return;
+    }
     const stackLen = world.stack.length;
     const score = stackLen - 1;
     this.drawBackground(score > 0 ? score : 0);
@@ -476,6 +479,7 @@ class Renderer {
     // Draw stacked blocks
     for (let i = 0; i < world.stack.length; i++) {
       const obj = world.stack[i];
+      if (!obj) continue;
       this.drawBlock(obj.x, obj.y, obj.z, obj.w, obj.d, obj.color);
     }
 
@@ -492,8 +496,11 @@ class Renderer {
     }
 
     // Draw falling debris with rotation
-    for (let i = 0; i < world.debris.length; i++) {
-      this.drawFallingDebris(world.debris[i]);
+    if (world.debris) {
+      for (let i = 0; i < world.debris.length; i++) {
+        if (!world.debris[i]) continue;
+        this.drawFallingDebris(world.debris[i]);
+      }
     }
 
     if (world.perfectEffect) {

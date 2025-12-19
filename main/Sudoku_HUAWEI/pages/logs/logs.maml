@@ -1,0 +1,7 @@
+<scroll-view class='scrollarea' scroll-y type='list'>
+  <block ma:for='{{logs}}' ma:key='timeStamp' ma:for-item='log'>
+    <view class='log-item'>
+{{index + 1}}. {{log.date}}
+    </view>
+  </block>
+</scroll-view>

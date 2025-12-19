@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<view class="container">
+  
+  <!-- Splash Screen -->
+  <view class="screen splash-screen" wx:if="{{currentScreen === 'splash'}}">
+    <image class="splash-logo" src="/images/logo.png" mode="aspectFit" />
+  </view>
+
+  <!-- Start Screen -->
+  <view class="screen start-screen" wx:if="{{currentScreen === 'start'}}">
+    <image class="start-logo" src="/images/logo.png" mode="aspectFit" />
+    
+    <view class="header">
+      <view class="title">Sudoku Challenge</view>
+      <view class="subtitle">Test your logic skills</view>
+    </view>
+    
+    <view class="difficulty-section">
+      <view class="difficulty-label">Select Difficulty</view>
+      <view class="difficulty-menu">
+        <view class="diff-option {{difficulty === 'easy' ? 'selected' : ''}}" bindtap="onTapDifficulty" data-diff="easy">Easy</view>
+        <view class="diff-option {{difficulty === 'medium' ? 'selected' : ''}}" bindtap="onTapDifficulty" data-diff="medium">Medium</view>
+        <view class="diff-option {{difficulty === 'hard' ? 'selected' : ''}}" bindtap="onTapDifficulty" data-diff="hard">Hard</view>
+      </view>
+    </view>
+
+    <button class="btn primary big-btn" bindtap="onTapStart">Start Game</button>
+  </view>
+
+  <!-- Game Screen -->
+  <view class="screen game-screen" wx:if="{{currentScreen === 'game'}}">
+    <view class="game-header">
+      <view class="timer">{{timer}}</view>
+    </view>
+
+    <view class="game-board" id="board">
+      <block wx:for="{{board}}" wx:key="index">
+        <input 
+          class="cell {{item.fixed ? 'fixed' : ''}} {{item.incorrect ? 'incorrect' : ''}} {{item.correct ? 'correct' : ''}} {{item.borderRight ? 'border-right' : ''}} {{item.borderBottom ? 'border-bottom' : ''}}" 
+          type="number" 
+          maxlength="1" 
+          value="{{item.value !== 0 ? item.value : ''}}" 
+          disabled="{{item.fixed}}" 
+          bindinput="onInputCell" 
+          data-index="{{index}}"
+        />
+      </block>
+    </view>
+
+    <view class="controls">
+      <button class="btn primary" bindtap="onTapNewGame">New Game</button>
+      <button class="btn secondary" bindtap="onTapReveal">Check Solution</button>
+    </view>
+
+    <view class="message" style="color: {{messageColor}}">{{messageText}}</view>
+  </view>
+
+  <!-- Win Screen -->
+  <view class="screen win-screen" wx:if="{{currentScreen === 'win'}}">
+    <view class="win-content">
+      <view class="win-title">Well Done!</view>
+      <view class="win-time">Time: {{timer}}</view>
+      <button class="btn primary big-btn" bindtap="onTapNewGame">Play Again</button>
+    </view>
+  </view>
+
+</view>

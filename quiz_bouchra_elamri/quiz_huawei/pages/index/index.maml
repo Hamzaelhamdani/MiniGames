@@ -1,0 +1,41 @@
+<view class='page'>
+  <view ma:if="{{screen === 'start'}}" class='screen start-screen'>
+    <text class='title'>Knowledge Quiz    </text>
+    <text class='subtitle'>Take a moment to challenge yourself with a few interesting questions.    </text>
+    <button class='start-btn' bindtap='startQuiz'>
+Start Now
+    </button>
+  </view>
+  <view ma:if="{{screen === 'quiz'}}" class='screen quiz-screen'>
+    <view class='question-card'>
+      <view class='question-header'>
+        <text class='q-counter'>Question {{currentIndex + 1}} of {{total}}        </text>
+      </view>
+      <view class='question-body'>
+        <text class='question-text'>{{questions[currentIndex].q}}        </text>
+      </view>
+      <view class='options'>
+        <block ma:for='{{questions[currentIndex].options}}' ma:for-item='opt' ma:for-index='i'>
+          <button class='option-btn option-{{i}}' data-index='{{i}}' bindtap='chooseOption'>
+            <view class='option-badge'>
+{{String.fromCharCode(65 + i)}}
+            </view>
+            <view class='option-text'>
+{{opt}}
+            </view>
+          </button>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view ma:if="{{screen === 'result'}}" class='screen result-screen'>
+    <view class='question-card result-card {{resultAnim}}'>
+      <text class='result-title'>All Done!      </text>
+      <text class='result-score'>You got {{score}} out of {{total}} right      </text>
+      <text class='result-msg'>{{resultMessage}}      </text>
+    </view>
+    <button class='restart-btn' bindtap='restartQuiz'>
+Play Again
+    </button>
+  </view>
+</view>

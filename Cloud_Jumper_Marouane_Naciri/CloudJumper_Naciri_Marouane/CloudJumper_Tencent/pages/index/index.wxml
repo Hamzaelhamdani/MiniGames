@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<view class="container">
+
+  
+  <!-- Main content -->
+  <view class="logo-section">
+    <view class="bird-container">
+      <image class="bird-icon" src="/images/bird.png" mode="aspectFit"></image>
+    </view>
+    <text class="title">Cloud Jumper</text>
+    <text class="subtitle">Tap to fly through the sky!</text>
+  </view>
+  
+  <!-- High score display -->
+  <view class="score-section" wx:if="{{highScore > 0}}">
+    <text class="high-score-text">High Score: {{highScore}}</text>
+  </view>
+  
+  <view class="controls">
+    <button class="start-btn" bindtap="onStartGame">
+      <text class="btn-text">PLAY</text>
+    </button>
+  </view>
+  
+  <!-- Ground decoration -->
+  <view class="ground"></view>
+</view>

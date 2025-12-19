@@ -1,0 +1,73 @@
+<view class="settings-page">
+  <view class="header">
+    <view class="back-btn" bindtap="onBack">←</view>
+    <text class="title">Settings</text>
+  </view>
+
+  <scroll-view scroll-y class="content">
+    <!-- Difficulty -->
+    <view class="section">
+      <view class="section-title">DIFFICULTY</view>
+      <view class="option-row">
+        <view 
+          class="option-btn {{difficulty === 'easy' ? 'active' : ''}}" 
+          bindtap="onDifficultyChange" 
+          data-value="easy"
+        >Easy</view>
+        <view 
+          class="option-btn {{difficulty === 'normal' ? 'active' : ''}}" 
+          bindtap="onDifficultyChange" 
+          data-value="normal"
+        >Normal</view>
+        <view 
+          class="option-btn {{difficulty === 'hard' ? 'active' : ''}}" 
+          bindtap="onDifficultyChange" 
+          data-value="hard"
+        >Hard</view>
+      </view>
+    </view>
+
+    <!-- Theme -->
+    <view class="section">
+      <view class="section-title">THEME</view>
+      <view class="theme-grid">
+        <view 
+          wx:for="{{themes}}" 
+          wx:key="key"
+          class="theme-item {{theme === item.key ? 'active' : ''}}"
+          bindtap="onThemeChange"
+          data-value="{{item.key}}"
+        >
+          <text class="theme-icon">{{item.icon}}</text>
+          <text class="theme-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Audio & Haptics -->
+    <view class="section">
+      <view class="section-title">AUDIO & HAPTICS</view>
+      
+      <view class="toggle-item" bindtap="onSfxToggle">
+        <text>Sound Effects</text>
+        <view class="toggle {{sfxEnabled ? 'on' : ''}}">
+          <view class="toggle-knob"></view>
+        </view>
+      </view>
+      
+      <view class="toggle-item" bindtap="onMusicToggle">
+        <text>Music</text>
+        <view class="toggle {{musicEnabled ? 'on' : ''}}">
+          <view class="toggle-knob"></view>
+        </view>
+      </view>
+      
+      <view class="toggle-item" bindtap="onVibrationToggle">
+        <text>Vibration</text>
+        <view class="toggle {{vibrationEnabled ? 'on' : ''}}">
+          <view class="toggle-knob"></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

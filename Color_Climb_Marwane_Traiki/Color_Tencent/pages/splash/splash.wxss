@@ -1,0 +1,32 @@
+.splash-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #3f3f3f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-out;
+}
+
+.splash-logo {
+  width: 200rpx;
+  height: 200rpx;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeInScaleUp 1s ease-out forwards;
+}
+
+@keyframes fadeInScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-out {
+  opacity: 0;
+}

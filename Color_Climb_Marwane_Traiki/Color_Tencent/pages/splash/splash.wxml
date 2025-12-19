@@ -1,0 +1,3 @@
+<view class="splash-container {{exit ? 'fade-out' : ''}}">
+  <image class="splash-logo fade-in-scale-up" src="../../images/splash.png" mode="aspectFit"></image>
+</view>

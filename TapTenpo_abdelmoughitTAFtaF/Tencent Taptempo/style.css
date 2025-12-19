@@ -1,0 +1,383 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* Radial gradients for the "lighting" effect (Top-Left and Bottom-Right) */
+    background-image: radial-gradient(circle at top left, #4a2800 0%, transparent 60%),
+        radial-gradient(circle at bottom right, #4a2800 0%, transparent 60%);
+    background-color: #1C1C1C;
+    color: #FFFFFF;
+    overflow: hidden;
+    /* Prevent scrolling for app-like feel */
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    /* Start hidden for fade-in */
+    transition: opacity 0.6s ease-in-out;
+    /* Smooth transition */
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* Game Page Styles */
+/* Game Page Styles */
+.game-container {
+    justify-content: flex-start;
+    /* Align content to top for game view */
+    background: radial-gradient(circle at top left, #4a2800 0%, transparent 60%),
+        radial-gradient(circle at bottom right, #4a2800 0%, transparent 60%);
+    background-color: #1C1C1C;
+    padding-top: 60px;
+    /* Increased top padding */
+}
+
+.game-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    /* Increased space below logo section */
+}
+
+.game-logo .logo {
+    max-width: 180px;
+    /* Increased slightly */
+    margin-bottom: 8px;
+}
+
+.game-slogan {
+    font-size: 5px;
+    /* Extremely small */
+    letter-spacing: 2px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-style: italic;
+    opacity: 0.8;
+    max-width: 180px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 40px;
+    /* Space between header and text box */
+}
+
+.level-indicator {
+    font-size: 22px;
+    /* Larger */
+    letter-spacing: 6px;
+    font-weight: 800;
+    /* Bolder */
+    margin-bottom: 15px;
+    /* Space between level and timer */
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.timer {
+    font-size: 72px;
+    /* Bigger timer */
+    font-weight: bold;
+    color: #FF7900;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    /* Prevent jitter */
+}
+
+/* Target Text Box */
+.target-text-container {
+    background-color: #000000;
+    border: 2px solid #FF7900;
+    border-radius: 20px;
+    padding: 25px;
+    width: 100%;
+    max-width: 350px;
+    height: 130px;
+    /* Slight increase */
+    margin-bottom: 30px;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(255, 121, 0, 0.3);
+    /* Soft glow */
+}
+
+.target-text {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    text-align: left;
+    font-family: inherit;
+}
+
+.char {
+    transition: color 0.1s;
+}
+
+.char.correct {
+    color: #FF7900;
+}
+
+.char.incorrect {
+    color: red;
+    text-decoration: underline;
+}
+
+/* Input Box */
+.input-box {
+    width: 100%;
+    max-width: 350px;
+    height: 90px;
+    /* Slight increase */
+    border-radius: 20px;
+    padding: 25px;
+    border: 2px solid #FF7900;
+    /* Orange border as per image */
+    font-size: 14px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    background-color: #FFFFFF;
+    color: #000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.input-box:focus {
+    box-shadow: 0 0 15px rgba(255, 121, 0, 0.5);
+    /* Glow on focus */
+}
+
+/* Level Complete Section */
+.level-complete-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 80px;
+    /* Increased bottom spacing */
+    animation: fadeIn 0.5s ease-out;
+}
+
+.accuracy-container {
+    text-align: center;
+}
+
+.accuracy-percent {
+    font-size: 40px;
+    color: #FF7900;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1;
+}
+
+.accuracy-label {
+    font-size: 16px;
+    color: #FF7900;
+    font-weight: bold;
+    margin: 0;
+}
+
+.next-level-btn {
+    background-color: #FF7900;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 121, 0, 0.5);
+    background-image: linear-gradient(to bottom, #FF8A1F, #FF7900);
+}
+
+.next-level-btn:hover {
+    transform: scale(1.05);
+}
+
+.retry-btn {
+    background-color: #FFD700;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: none;
+    /* Removed glow */
+    /* Removed gradient */
+    text-shadow: none;
+    /* Removed text shadow */
+}
+
+.retry-btn:hover {
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Flexbox Container for Vertical/Horizontal Centering */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 20px 30px;
+    /* Added horizontal padding for safe areas */
+    padding-bottom: 5vh;
+}
+
+/* Main content wrapper - grows to fill available space and centers content */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* Logo Section */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    /* Space between logo and button */
+}
+
+.logo {
+    height: auto;
+    width: auto;
+    max-width: 80%;
+    /* Ensure it fits within narrower screens */
+    max-height: 80px;
+    /* Cap the height so it doesn't get too big on tablets */
+    object-fit: contain;
+}
+
+/* Main Action Section */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-btn {
+    background-color: #FF7900;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 80px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 121, 0, 0.6);
+    /* Orange glow */
+    background-image: linear-gradient(to bottom, #FF8A1F, #FF7900);
+    margin-bottom: 40px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.start-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 10px rgba(255, 121, 0, 0.4);
+}
+
+.slogan {
+    font-size: 10px;
+    text-align: center;
+    letter-spacing: 6px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    font-style: italic;
+    max-width: 300px;
+    /* Increased to allow wider text */
+    line-height: 1.8;
+    /* Increased line height for better readability with spacing */
+}
+
+/* Footer - Absolutely positioned at bottom */
+/* Congratulations Page */
+.congrats-container {
+    justify-content: center;
+    /* Center everything vertically */
+    padding-top: 0;
+}
+
+.congrats-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.congrats-title {
+    font-size: 40px;
+    color: #FF7900;
+    font-weight: 800;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+
+.congrats-subtitle {
+    font-size: 32px;
+    color: #FFFFFF;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 60px;
+}
+
+.home-btn {
+    background-color: #FF7900;
+    border: none;
+    border-radius: 30px;
+    /* Rounded square/rect look */
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(255, 121, 0, 0.4);
+    background-image: linear-gradient(to bottom, #FF8A1F, #FF7900);
+    transition: transform 0.1s;
+}
+
+.home-btn:active {
+    transform: scale(0.95);
+}
+
+.home-btn svg {
+    width: 60%;
+    height: 60%;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapTempo - Congratulations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container congrats-container">
+        <!-- Logo Section -->
+        <div class="logo-container game-logo">
+            <img src="images/logo.png" alt="TapTempo Logo" class="logo">
+            <p class="slogan game-slogan">ONLY SPEED REVEALS TRUE FOCUS</p>
+        </div>
+
+        <div class="congrats-content">
+            <h1 class="congrats-title">Congratulations</h1>
+            <h2 class="congrats-subtitle">We can’t speed<br>faster than you</h2>
+
+            <button class="home-btn" onclick="transitionTo('index.html')">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z" fill="white" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>@Created by orange</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 50);
+        });
+
+        function transitionTo(url) {
+            document.body.classList.remove('loaded');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>

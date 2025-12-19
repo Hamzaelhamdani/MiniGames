@@ -1,0 +1,17 @@
+<view class="container congrats-container">
+  <!-- Logo Section -->
+  <view class="logo-container game-logo">
+    <image src="/images/logo.png" mode="widthFix" class="logo"></image>
+    <text class="slogan game-slogan">ONLY SPEED REVEALS TRUE FOCUS</text>
+  </view>
+
+  <view class="congrats-content">
+    <text class="congrats-title">Congratulations</text>
+    <text class="congrats-subtitle">We can’t speed\nfaster than you</text>
+
+    <view class="home-btn" bindtap="onGoHome">
+      <image src="/home.png" style="width: 80px; height: 80px;"></image>
+    </view>
+  </view>
+
+</view>

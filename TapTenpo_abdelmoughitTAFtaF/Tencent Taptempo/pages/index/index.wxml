@@ -1,0 +1,98 @@
+<view class="container">
+  
+  <!-- Home View -->
+  <view class="content-wrapper" wx:if="{{!gameStarted && !isGameWon}}">
+    <!-- Logo Section -->
+    <view class="logo-container">
+      <image src="/images/logo.png" mode="widthFix" class="logo"></image>
+    </view>
+
+    <!-- Main Action Section -->
+    <view class="main-content">
+      <button class="start-btn" bindtap="onStartGame">Start</button>
+      <text class="slogan">ONLY SPEED REVEALS TRUE FOCUS</text>
+    </view>
+  </view>
+
+  <!-- Game View -->
+  <view class="content-wrapper" wx:if="{{gameStarted && !isGameWon}}">
+    <!-- Logo Section -->
+    <view class="logo-container game-logo">
+      <image src="/images/logo.png" mode="widthFix" class="logo"></image>
+      <text class="slogan game-slogan">ONLY SPEED REVEALS TRUE FOCUS</text>
+    </view>
+
+    <!-- Level & Timer -->
+    <view class="game-header">
+      <text class="level-indicator">Level {{currentLevelIndex + 1}} / 10</text>
+      <view class="timer" style="color: {{timerColor}}">{{timerText}}</view>
+    </view>
+
+    <!-- Target Text Box -->
+    <view class="target-text-container">
+      <view class="target-text">
+        <text wx:for="{{targetTextChars}}" wx:key="index" class="char {{item.status}}">{{item.char}}</text>
+      </view>
+    </view>
+
+    <!-- Input Box -->
+    <textarea 
+      class="input-box" 
+      placeholder="speed here..." 
+      value="{{inputValue}}" 
+      bindinput="handleInput" 
+      disabled="{{!isPlaying}}"
+      focus="{{isPlaying}}"
+    ></textarea>
+
+    <!-- Level Complete Section -->
+    <view class="level-complete-section" wx:if="{{isLevelComplete}}">
+      <view class="accuracy-container">
+        <text class="accuracy-percent">100%</text>
+        <text class="accuracy-label">accuracy</text>
+      </view>
+      <button class="next-level-btn" bindtap="onNextLevel">Next level</button>
+    </view>
+
+    <!-- Level Failed Section -->
+    <view class="level-complete-section" wx:if="{{isLevelFailed}}">
+      <view class="accuracy-container">
+        <text class="accuracy-percent">{{failedAccuracy}}%</text>
+        <text class="accuracy-label">accuracy</text>
+      </view>
+      
+      <button class="retry-btn" bindtap="{{showRestart ? 'onRestartGame' : 'onRetry'}}">
+        {{showRestart ? 'Restart Game' : 'Retry!'}}
+      </button>
+    </view>
+
+    <!-- Navigation Controls -->
+    <view class="game-nav-controls">
+      <view class="nav-icon" bindtap="onPrevLevel" wx:if="{{currentLevelIndex > 0}}">
+        <text class="arrow-symbol">←</text>
+      </view>
+      <view class="nav-icon" bindtap="onGoHome">
+        <text class="home-symbol">⌂</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Congratulations View -->
+  <view class="content-wrapper congrats-container" wx:if="{{isGameWon}}">
+    <!-- Logo Section -->
+    <view class="logo-container game-logo">
+      <image src="/images/logo.png" mode="widthFix" class="logo"></image>
+      <text class="slogan game-slogan">ONLY SPEED REVEALS TRUE FOCUS</text>
+    </view>
+
+    <view class="congrats-content">
+      <text class="congrats-title">Congratulations</text>
+      <text class="congrats-subtitle">We can’t speed\nfaster than you</text>
+
+      <view class="home-btn" bindtap="onGoHome">
+         <image src="/home.png" style="width: 80px; height: 80px;"></image>
+      </view>
+    </view>
+  </view>
+
+</view>

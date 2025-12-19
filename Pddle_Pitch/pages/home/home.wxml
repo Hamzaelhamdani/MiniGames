@@ -1,0 +1,16 @@
+<!--pages/home/home.wxml-->
+<view class="home-container">
+  <view class="header">
+    <view class="logo">
+      <text class="logo-icon">🏓</text>
+      <text class="logo-text">PONG</text>
+    </view>
+    <button class="settings-btn" bindtap="onSettings">⚙️</button>
+  </view>
+  
+  <view class="home-main">
+    <button class="primary-btn start-btn" bindtap="onStartGame">
+      Start New Game
+    </button>
+  </view>
+</view>

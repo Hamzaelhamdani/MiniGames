@@ -1,0 +1,17 @@
+<!--pages/game/game.wxml-->
+<view class="game-page">
+  <!-- Fullscreen Canvas -->
+  <canvas 
+    canvas-id="pongCanvas" 
+    class="pong-canvas"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+  ></canvas>
+  
+  <!-- Simple Controls -->
+  <view class="controls">
+    <button class="btn" bindtap="onRestart">Restart</button>
+    <button class="btn" bindtap="onHome">Home</button>
+  </view>
+</view>
